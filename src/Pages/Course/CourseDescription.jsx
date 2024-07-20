@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +9,6 @@ const CourseDescription = () => {
   const navigate = useNavigate();
 
   const { role, data } = useSelector((state) => state.auth);
-
-  useEffect(() => {}, []);
 
   return (
     <HomeLayout>
