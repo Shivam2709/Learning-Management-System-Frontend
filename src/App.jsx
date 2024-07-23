@@ -1,5 +1,3 @@
-import "./App.css";
-
 import { Route, Routes } from "react-router-dom";
 
 import RequireAuth from "./Components/Auth/RequireAuth";
@@ -13,6 +11,7 @@ import HomePage from "./Pages/HomePage";
 import Login from "./Pages/Login";
 import NotFound from "./Pages/NotFound";
 import SignUp from "./Pages/SignUp";
+import EditProfile from "./Pages/User/EditProfile";
 import Profile from "./Pages/User/Profile";
 
 function App() {
@@ -32,6 +31,7 @@ function App() {
 
         <Route element={<RequireAuth allowedRoles={['ADMIN', 'USER']} />}>
           <Route path="/user/profile" element={<Profile />} />
+          <Route path="/user/editprofile" element={<EditProfile />} />
         </Route>
         
         <Route path="/signup" element={<SignUp />} />
