@@ -5,7 +5,7 @@ import axiosInstance from "../../Helpers/axiosInstance";
 const initialState = {
   isLoggedIn: localStorage.getItem("isLoggedIn") || false,
   role: localStorage.getItem("role") || "",
-  data: localStorage.getItem('data') == undefined ? JSON.parse(localStorage.getItem('data')) : {}, // with user of json.pasre it convert data string to Json object.
+  data: localStorage.getItem('data') != undefined ? JSON.parse(localStorage.getItem('data')) : {} // with user of json.pasre it convert data string to Json object.
 };
 
 export const createAccount = createAsyncThunk("/auth/signup", async (data) => {
@@ -56,10 +56,11 @@ export const logout = createAsyncThunk("/auth/logout", async () => {
   }
 });
 
-export const updateProfile = createAsyncThunk("/user/update/profile", async (data) => {
+export const updateProfile = createAsyncThunk("/user/update/profile", async (formData) => {
   try {
-    const res = axiosInstance.put(`user/update/${data[0]}`, data[1]);
-    console.log("data", data);
+    const userId = formData.get('userId');
+    const res = axiosInstance.put(`user/update/${userId}`, formData);
+    console.log("formData", formData);
     toast.promise(res, {
       loading: "Wait! profile update in progress...",
       success: (data) => {
@@ -72,6 +73,7 @@ export const updateProfile = createAsyncThunk("/user/update/profile", async (dat
     toast.error(error?.response?.data?.message);
   }
 });
+
 
 export const getUserDetails = createAsyncThunk("/user/details", async () => {
   try {

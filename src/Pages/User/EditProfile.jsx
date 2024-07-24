@@ -14,6 +14,7 @@ const EditProfile = () => {
     const [data, setData] = useState({
         previewImage: "",
         fullName: "",
+        email:"",
         avatar: undefined,
         userId: useSelector((state) => state?.auth?.data?._id)
     });
@@ -38,31 +39,34 @@ const EditProfile = () => {
         const { name, value } = e.target;
         setData({
             ...data,
-            [name]: value
+            [name]: value,
         })
     }
 
     async function onFormSubmit(e) {
-        e.preventDefault();
-        if(!data.fullName || !data.avatar) {
-            toast.error("Please fill all the details");
-            return;
-        }
-        if(data.fullName.length < 5){
-            toast.error("Name cannot be less than 5 characters");
-            return;
-        }
-        const formData = new FormData();
-        formData.append("fullName", data.fullName);
-        formData.append("avatar", data.avatar);
-
-        await dispatch(updateProfile(data.userId, data));
-
-        await dispatch(getUserDetails());
-
-        navigate("/user/profile");
-
-    }
+      e.preventDefault();
+      if (!data.fullName || !data.avatar || !data.email) {
+          toast.error("Please fill all the details");
+          return;
+      }
+      if (data.fullName.length < 5) {
+          toast.error("Name cannot be less than 5 characters");
+          return;
+      }
+      const formData = new FormData();
+      formData.append("fullName", data.fullName);
+      formData.append("avatar", data.avatar);
+      formData.append("email", data.email); // Append email to formData
+      formData.append("userId", data.userId); // Append userId to formData
+  
+      await dispatch(updateProfile(formData));
+  
+      await dispatch(getUserDetails());
+  
+      navigate("/user/profile");
+  }
+  
+  
 
   return (
     <HomeLayout>
@@ -102,6 +106,21 @@ const EditProfile = () => {
               placeholder="Enter your name"
               className="bg-transparent px-2 py-1 border"
               value={data.fullName}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="email" className="text-lg font-semibold">
+              Email
+            </label>
+            <input
+              required
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              className="bg-transparent px-2 py-1 border"
+              value={data.email}
               onChange={handleInputChange}
             />
           </div>
