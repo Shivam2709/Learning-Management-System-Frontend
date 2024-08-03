@@ -37,7 +37,7 @@ function App() {
           <Route path="/user/editprofile" element={<EditProfile />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
-          <Route path="/checkout/failuer" element={<CheckoutFailure />} />
+          <Route path="/checkout/fail" element={<CheckoutFailure />} />
         </Route>
         
         <Route path="/signup" element={<SignUp />} />

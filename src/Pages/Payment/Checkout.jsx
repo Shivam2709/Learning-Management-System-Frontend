@@ -11,8 +11,8 @@ function Checkout() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const razorpayKey = useSelector((state) => state?.razorpay?.key);
-    const subscription_id = useSelector((state) => state?.razorpay?.subscription_id);
+    const razorpayKey = useSelector((state) => state?.Razorpay?.key);
+    const subscription_id = useSelector((state) => state?.Razorpay?.subscription_id);
     const paymentDetails = {
         razorpay_payment_id: "",
         razorpay_subscription_id: "",
@@ -23,6 +23,9 @@ function Checkout() {
         e.preventDefault();
         if(!razorpayKey || !subscription_id) {
             toast.error("Something went wrong");
+
+            console.log("razoppay", razorpayKey);
+            console.log("subscribe", subscription_id);
             return;
         }
         const options = {

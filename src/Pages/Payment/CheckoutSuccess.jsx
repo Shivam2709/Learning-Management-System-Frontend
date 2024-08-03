@@ -4,15 +4,16 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import HomeLayout from "../../Layouts/HomeLayout";
-import { getUserData } from "../../Redux/Slices/AuthSlice";
+import { getUserDetails } from "../../Redux/Slices/AuthSlice";
 
 const CheckoutSuccess = () => {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getUserData());
+        dispatch(getUserDetails());
     })
+    
   return (
     <HomeLayout>
             <div className="min-h-[90vh] flex items-center justify-center text-white">
