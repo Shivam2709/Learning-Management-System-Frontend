@@ -96,7 +96,6 @@ const Addlecture = () => {
             />
             {userInput.videoSrc ? (
               <video
-                muted
                 src={userInput.videoSrc}
                 controls
                 controlsList="nodownload nofullscreen"

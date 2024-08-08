@@ -21,7 +21,6 @@ const Displaylectures = () => {
   }, []);
 
   async function onLectureDelete(courseId, lectureId){
-    console.log(courseId, lectureId);
     await dispatch(deleteCourseLecture({courseId: courseId, lectureId: lectureId}));
     await dispatch(getCourseLectures(courseId));
   }
