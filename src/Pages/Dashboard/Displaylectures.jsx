@@ -15,7 +15,6 @@ const Displaylectures = () => {
   const [currentVideo, setCurrentVideo] = useState(0);
 
   useEffect(() => {
-    console.log(state);
     if (!state) navigate("/courses");
     dispatch(getCourseLectures(state._id));
   }, []);
