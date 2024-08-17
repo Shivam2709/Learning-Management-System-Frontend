@@ -25,7 +25,6 @@ export const getRazorPayId = createAsyncThunk("/razorpay/getId", async () => {
 export const  purchaseCourseBundle = createAsyncThunk("/purchaseCourse", async () => {
     try {
         const response = await axiosInstance.post("/payments/subscribe");
-        console.log(response)
         return response.data;
     } catch(error) {
         toast.error(error?.response?.data?.message);
@@ -90,19 +89,16 @@ const razorpaySlice = createSlice({
             state.subscription_id = action?.payload?.subscription_id;
         })
         .addCase(verifyUserPayment.fulfilled, (state, action) => {
-            console.log(action);
             toast.success(action?.payload?.message);
             state.isPaymentVerified = action?.payload?.success;
         })
         .addCase(verifyUserPayment.rejected, (state, action) => {
-            console.log(action);
             toast.success(action?.payload?.message);
             state.isPaymentVerified = action?.payload?.success;
         })
         .addCase(getPaymentRecord.fulfilled, (state, action) => {
-            state.allPayments = action?.payload?.allPayments;
-            state.finalMonths = action?.payload?.finalMonths;
-            state.monthlySalesRecord = action?.payload?.monthlySalesRecord;
+            state.allPayments = action?.payload?.allPayments || 0;
+            state.monthlySalesRecord = action?.payload?.monthlySalesRecord || 0;
         })
     }
 });

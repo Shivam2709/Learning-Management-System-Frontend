@@ -29,8 +29,8 @@ const statSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getStatsData.fulfilled, (state, action) => {
-            state.allUsersCount = action?.payload?.allUsersCount;
-            state.subscribedCount =  action?.payload?.subscribedUsersCount;
+            state.allUsersCount = action?.payload?.data?.allUsersCount;
+            state.subscribedCount =  action?.payload?.data?.subscribeCount;
         })
     }
 });

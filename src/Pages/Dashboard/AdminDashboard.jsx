@@ -36,7 +36,7 @@ const AdminDashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { allUsersCount, subscribedCount } = useSelector((state) => state.stat);
+  const { allUsersCount, subscribedCount } = useSelector((state) => state.stat)
 
   const { allPayments, monthlySalesRecord } = useSelector((state) => state.Razorpay);
 
@@ -136,7 +136,7 @@ const AdminDashboard = () => {
               <div className="flex items-center justify-between p-5 gap-5 rounded-md shadow-md">
                 <div className="flex flex-col items-center">
                   <p className="font-semibold">Subscription Count</p>
-                  <h3 className="text-4xl font-bold">{allPayments?.count}</h3>
+                  <h3 className="text-4xl font-bold">{allPayments}</h3>
                 </div>
                 <FcSalesPerformance className="text-yellow-500 text-5xl" />
               </div>
@@ -144,7 +144,7 @@ const AdminDashboard = () => {
                 <div className="flex flex-col items-center">
                   <p className="font-semibold">Total Revenue</p>
                   <h3 className="text-4xl font-bold">
-                    {allPayments?.count * 499}
+                    {allPayments * 499}
                   </h3>
                 </div>
                 <GiMoneyStack className="text-green-500 text-5xl" />
