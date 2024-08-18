@@ -40,25 +40,28 @@ const AdminDashboard = () => {
 
   const { allPayments, monthlySalesRecord } = useSelector((state) => state.Razorpay);
 
+
   const userData = {
-    lebels: ["Registered User", "Enrolled User"],
+    labels: ["Registered User", "Enrolled User"],
     fontColor: "white",
     datasets: [
-      {
-        label: "User Details",
-        data: [allUsersCount, subscribedCount],
-        backgroundColor: ["yellow", "green"],
-        borderWidth: 1,
-        borderColor: ["yellow", "green"],
-      },
-    ],
-  };
+        {
+            label: "User Details",
+            data: [allUsersCount, subscribedCount],
+            backgroundColor: ["yellow", "green"],
+            borderWidth: 1,
+            borderColor: ["yellow","green"]
+        },
+    ]
+};
 
   const salesData = {
     labels: [
       "Jan",
       "Feb",
       "Mar",
+      "Apr",
+      "May",
       "Jun",
       "Jul",
       "Aug",
@@ -72,7 +75,8 @@ const AdminDashboard = () => {
       {
         label: "Sales / Month",
         data: monthlySalesRecord,
-        backgroundColor: ["white"],
+        backgroundColor: ["red"],
+        borderColor: ['white'],
         borderWidth: 2,
       },
     ],
@@ -96,6 +100,9 @@ const AdminDashboard = () => {
       await dispatch(getPaymentRecord());
     })();
   }, []);
+
+  const allPaymentsValid = typeof allPayments === 'number' ? allPayments : 0;
+  
   return (
     <HomeLayout>
       <div className="min-h-[90vh] pt-5 flex flex-col flex-wrap gap-10 text-white">
@@ -136,7 +143,7 @@ const AdminDashboard = () => {
               <div className="flex items-center justify-between p-5 gap-5 rounded-md shadow-md">
                 <div className="flex flex-col items-center">
                   <p className="font-semibold">Subscription Count</p>
-                  <h3 className="text-4xl font-bold">{allPayments}</h3>
+                  <h3 className="text-4xl font-bold">{allPaymentsValid}</h3>
                 </div>
                 <FcSalesPerformance className="text-yellow-500 text-5xl" />
               </div>
@@ -144,7 +151,7 @@ const AdminDashboard = () => {
                 <div className="flex flex-col items-center">
                   <p className="font-semibold">Total Revenue</p>
                   <h3 className="text-4xl font-bold">
-                    {allPayments * 499}
+                  {allPaymentsValid * 499}
                   </h3>
                 </div>
                 <GiMoneyStack className="text-green-500 text-5xl" />
